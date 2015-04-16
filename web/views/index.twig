@@ -13,6 +13,7 @@
                     <th>Lastname</th>
                     <th>Post</th>
                     <th>Book</th>
+                    <th>Author</th>
                 </tr>
             </thead>
         {% for people in people %}
@@ -26,6 +27,7 @@
                     {% endif %}
                     {{ people.book_name }}
                 </td>
+                <td>{{ people.book_author }}</td>
             </tr>            
        {% endfor %}
        </table>

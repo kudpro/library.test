@@ -2,7 +2,7 @@
 // controllers.php
 
 $app->get('/', function () use ($app) {
-    $people = $app['db']->fetchAll("SELECT a.id,a.name,a.lastname,a.post,b.book_name,b.book_holder FROM people AS a LEFT JOIN book AS b ON b.book_holder = a.id;");
+    $people = $app['db']->fetchAll("SELECT a.id,a.name,a.lastname,a.post,b.book_name,b.book_author,b.book_holder FROM people AS a LEFT JOIN book AS b ON b.book_holder = a.id;");
     return $app['twig']->render('index.twig', array('people' => $people));
 });
 
