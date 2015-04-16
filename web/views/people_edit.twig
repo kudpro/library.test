@@ -1,0 +1,55 @@
+{% extends 'base.twig' %}
+
+{% block title %}People{% endblock %}
+
+{% block content %}
+<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h3>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/people">View all</a></li>
+  <li role="presentation"><a href="/people/add">Add</a></li>
+</ul>
+
+<div class="row">
+    <div id="result">
+        {% for people in people %}
+        <form class="form-horizontal" action="/people/edit/" method="get">
+        <fieldset>
+        <!-- Text input-->
+        <input id="textinput" name="id" type="text"  hidden="hidden" value="{{ people.id }}">
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Name</label>
+            <div class="col-md-4">                
+                <input id="textinput" name="name" type="text" placeholder="Name" class="form-control input-md" value="{{ people.name }}">
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Lastname</label>  
+            <div class="col-md-4">
+                <input id="textinput" name="lastname" type="text" placeholder="Lastname" class="form-control input-md" value="{{ people.lastname }}">
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Post</label>  
+            <div class="col-md-4">
+                <input id="textinput" name="post" type="text" placeholder="Post" class="form-control input-md" value="{{ people.post }}">
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+                <button id="singlebutton" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+
+        </fieldset>
+        </form>
+        {% endfor %}
+    </div>              
+</div>
+{% endblock %}

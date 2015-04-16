@@ -1,0 +1,44 @@
+{% extends 'base.twig' %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<h3><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Books</h3>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/books">View all</a></li>
+  <li role="presentation"><a href="/books/add">Add</a></li>
+</ul>
+<div class="row">
+    <div id="result">
+        <form class="form-horizontal" action="/books/add/" method="get">
+        <fieldset>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Book name</label>  
+          <div class="col-md-4">
+              <input id="textinput" name="book_name" type="text" placeholder="Book name" class="form-control input-md">
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Book author</label>  
+              <div class="col-md-4">
+          <input id="textinput" name="book_author" type="text" placeholder="Book author" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+                <button id="singlebutton" class="btn btn-primary">Add book</button>
+            </div>
+        </div>
+
+        </fieldset>
+        </form>
+    </div>              
+</div>
+{% endblock %}

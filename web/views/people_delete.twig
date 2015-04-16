@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+
+{% block title %}People{% endblock %}
+
+{% block content %}
+<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h3>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/people">View all</a></li>
+  <li role="presentation"><a href="/people/add">Add</a></li>
+  <li role="presentation"><a href="/people/edit">Edit</a></li>
+  <li role="presentation"><a href="/people/delete">Delete</a></li>
+</ul>
+
+<div class="row">
+    <div id="result">
+       {% for people in people %}
+            {{ people.name }}
+            {{ people.lastname }}
+            {{ people.post }}
+       {% endfor %}
+    </div>              
+</div>
+{% endblock %}

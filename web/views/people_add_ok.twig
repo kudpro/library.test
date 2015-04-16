@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block title %}People{% endblock %}
+
+{% block content %}
+<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h3>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/people">View all</a></li>
+  <li role="presentation"><a href="/people/add">Add</a></li>
+</ul>
+<div class="row">
+    <div id="result">
+        <div class="alert alert-success" role="alert">Complete</p>
+    </div>              
+</div>
+{% endblock %}

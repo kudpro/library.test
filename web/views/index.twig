@@ -1,0 +1,35 @@
+{% extends 'base.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block content %}
+   
+<div class="row">
+    <div class="col-lg-6 col-md-4 " id="result">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Post</th>
+                    <th>Book</th>
+                </tr>
+            </thead>
+        {% for people in people %}
+            <tr>
+                <td>{{ people.name }}</td>
+                <td>{{ people.lastname }}</td>
+                <td>{{ people.post }}</td>
+                <td>
+                    {% if people.book_name == NULL %}
+                        Has no books
+                    {% endif %}
+                    {{ people.book_name }}
+                </td>
+            </tr>            
+       {% endfor %}
+       </table>
+    </div>              
+</div>
+    
+{% endblock %}
