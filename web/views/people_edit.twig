@@ -12,14 +12,15 @@
 <div class="row">
     <div id="result">
         {% for people in people %}
-        <form class="form-horizontal" action="/people/edit/" method="get">
+        <form class="form-horizontal" action="/people/edit" method="post">
+        <input type="hidden" id="_method" name="_method" value="PUT" />
         <fieldset>
         <!-- Text input-->
-        <input id="textinput" name="id" type="text"  hidden="hidden" value="{{ people.id }}">
+        <input id="textinput" name="p_id" type="text"  hidden="hidden" value="{{ people.p_id }}">
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Name</label>
             <div class="col-md-4">                
-                <input id="textinput" name="name" type="text" placeholder="Name" class="form-control input-md" value="{{ people.name }}">
+                <input id="textinput" name="p_name" type="text" placeholder="Name" class="form-control input-md" value="{{ people.p_name }}">
             </div>
         </div>
 
@@ -27,7 +28,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Lastname</label>  
             <div class="col-md-4">
-                <input id="textinput" name="lastname" type="text" placeholder="Lastname" class="form-control input-md" value="{{ people.lastname }}">
+                <input id="textinput" name="p_lastname" type="text" placeholder="Lastname" class="form-control input-md" value="{{ people.p_lastname }}">
             </div>
         </div>
         
@@ -35,7 +36,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Post</label>  
             <div class="col-md-4">
-                <input id="textinput" name="post" type="text" placeholder="Post" class="form-control input-md" value="{{ people.post }}">
+                <input id="textinput" name="p_post" type="text" placeholder="Post" class="form-control input-md" value="{{ people.p_post }}">
             </div>
         </div>
 
@@ -43,7 +44,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="singlebutton"></label>
             <div class="col-md-4">
-                <button id="singlebutton" class="btn btn-primary">Update</button>
+                <button id="singlebutton" class="btn btn-primary">Update</button> <button type="button" class="btn btn-warning" onclick="history.back()">Back</button>
             </div>
         </div>
 
