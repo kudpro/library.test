@@ -25,7 +25,7 @@ class Book{
         
         // Добавить данные вью
         public static function addbookView(Application $app){
-            return $app['twig']->render('b_add.twig');
+            return $app['twig']->render('book_add.twig');
         }
     
         // Добавить данные
@@ -103,7 +103,11 @@ class Book{
         }
         
         public static function changeHolder(Application $app, Request $request){
-            
+            if (!isset($request)) {
+                    $app->abort(404, "Request $id does not exist.");
+            }
+            $app['db']->update('book', array('b_holder' => $request->get('p_id')), array('b_id' => $request->get('b_id')));        
+            return $app['twig']->render('ok.twig');
         }
         
     }

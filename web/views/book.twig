@@ -5,8 +5,8 @@
 {% block content %}
 <h3><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Books</h3>
 <ul class="nav nav-pills">
-  <li role="presentation"><a href="/books">View all</a></li>
-  <li role="presentation"><a href="/books/add">Add</a></li>
+  <li role="presentation"><a href="/book">View all books</a></li>
+  <li role="presentation"><a href="/book/add">Add book</a></li>
 </ul>
 <div class="row">
     <div class="col-lg-7 col-md-6 " id="result">
@@ -25,7 +25,7 @@
                 <td>{{ book.b_author }}</td>
                 <td>
                     {% if book.p_name == NULL %}
-                        Has no owner
+                        ---
                     {% endif %}
                     {{ book.p_name }}{{ book.p_lastname }}
                 </td>

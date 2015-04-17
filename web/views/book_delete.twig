@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block title %}People{% endblock %}
+
+{% block content %}
+<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h3>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/people">View all</a></li>
+  <li role="presentation"><a href="/people/add">Add</a></li>
+</ul>
+
+<div class="row">
+    <div id="result">
+        <form class="form-horizontal" action="/book/delete" method="post">
+            <input type="hidden" id="_method" name="_method" value="DELETE" />
+            <fieldset>
+                <!-- Text input-->
+                <input id="textinput" name="b_id" type="text"  hidden="hidden" value="{{ b_id }}">
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button id="singlebutton" class="btn btn-danger">Delete {{ b_name }} {{ b_author }}?</button> <button type="button" class="btn btn-warning" onclick="history.back()">Back</button>
+                    </div>
+            </div>
+            </fieldset>
+        </form>
+    </div>              
+</div>
+{% endblock %}

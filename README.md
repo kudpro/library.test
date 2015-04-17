@@ -1,2 +1,2 @@
 # library.test
-File: library.backup - backup Postgresql database.
+File: kudpro_library.sql - backup MySQL database.

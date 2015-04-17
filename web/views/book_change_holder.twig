@@ -24,13 +24,14 @@
                 <td>{{ book.b_name }}</td>
                 <td>{{ book.b_author }}</td>
                 <td>
-                   <form action="/books/change/" method="get">
-                    <input type="text" hidden="hidden" name="b_id" value="{{ book.b_id }}">
-                    <select class="form-control" name="p_id">
-                        {% for people in people %}
-                        <option value="{{ people.p_id }}">{{ people.p_name }}{{ people.p_lastname }}</option>
-                        {% endfor %} 
-                    </select>                           
+                   <form action="/book/change" method="POST">
+                        <input type="hidden" id="_method" name="_method" value="PUT" />
+                        <input type="text" hidden="hidden" name="b_id" value="{{ book.b_id }}">
+                        <select class="form-control" name="p_id">
+                            {% for people in people %}
+                            <option value="{{ people.p_id }}">{{ people.p_name }}{{ people.p_lastname }}</option>
+                            {% endfor %} 
+                        </select>                           
                 </td>
                 <td>
                     <button type="submit" class="btn btn-default">Change</button>
