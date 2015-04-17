@@ -7,25 +7,21 @@
 <ul class="nav nav-pills">
   <li role="presentation"><a href="/people">View all</a></li>
   <li role="presentation"><a href="/people/add">Add</a></li>
-  <li role="presentation"><a href="/people/edit">Edit</a></li>
-  <li role="presentation"><a href="/people/delete">Delete</a></li>
 </ul>
 
 <div class="row">
     <div id="result">
-    <form class="form-horizontal" action="/people/delete" method="post">
+        <form class="form-horizontal" action="/people/delete" method="post">
             <input type="hidden" id="_method" name="_method" value="DELETE" />
             <fieldset>
-            <!-- Text input-->
-            <input id="textinput" name="p_id" type="text"  hidden="hidden" value="{{ p_id }}">
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="singlebutton">Are you sure you want to delete?</label>
-                <div class="col-md-4">
-                    <button id="singlebutton" class="btn btn-danger">OK</button> <button type="button" class="btn btn-warning" onclick="history.back()">Back</button>
-                </div>
+                <!-- Text input-->
+                <input id="textinput" name="p_id" type="text"  hidden="hidden" value="{{ p_id }}">
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button id="singlebutton" class="btn btn-danger">Delete {{ p_name }} {{ p_lastname }}?</button> <button type="button" class="btn btn-warning" onclick="history.back()">Back</button>
+                    </div>
             </div>
-
             </fieldset>
         </form>
     </div>              

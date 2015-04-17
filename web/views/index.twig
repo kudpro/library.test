@@ -18,16 +18,21 @@
             </thead>
         {% for people in people %}
             <tr>
-                <td>{{ people.name }}</td>
-                <td>{{ people.lastname }}</td>
-                <td>{{ people.post }}</td>
+                <td>{{ people.p_name }}</td>
+                <td>{{ people.p_lastname }}</td>
+                <td>{{ people.p_post }}</td>
                 <td>
-                    {% if people.book_name == NULL %}
-                        Has no books
+                    {% if people.b_name == NULL %}
+                        ---
                     {% endif %}
-                    {{ people.book_name }}
+                    {{ people.b_name }}
                 </td>
-                <td>{{ people.book_author }}</td>
+                <td>
+                    {% if people.b_author == NULL %}
+                        ---
+                    {% endif %}
+                    {{ people.b_author }}
+                </td>
             </tr>            
        {% endfor %}
        </table>

@@ -5,8 +5,8 @@
 {% block content %}
 <h3><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Books</h3>
 <ul class="nav nav-pills">
-  <li role="presentation"><a href="/books">View all</a></li>
-  <li role="presentation"><a href="/books/add">Add</a></li>
+  <li role="presentation"><a href="/book">View all books</a></li>
+  <li role="presentation"><a href="/book/add">Add book</a></li>
 </ul>
 <div class="row">
     <div class="col-lg-7 col-md-6 " id="result">
@@ -21,14 +21,14 @@
             </thead>
         {% for book in book %}
             <tr>
-                <td>{{ book.book_name }}</td>
-                <td>{{ book.book_author }}</td>
+                <td>{{ book.b_name }}</td>
+                <td>{{ book.b_author }}</td>
                 <td>
                    <form action="/books/change/" method="get">
-                    <input type="text" hidden="hidden" name="book_id" value="{{ book.book_id }}">
-                    <select class="form-control" name="people_id">
+                    <input type="text" hidden="hidden" name="b_id" value="{{ book.b_id }}">
+                    <select class="form-control" name="p_id">
                         {% for people in people %}
-                        <option value="{{ people.id }}">{{ people.name }}{{ people.lastname }}</option>
+                        <option value="{{ people.p_id }}">{{ people.p_name }}{{ people.p_lastname }}</option>
                         {% endfor %} 
                     </select>                           
                 </td>
