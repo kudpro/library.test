@@ -4,11 +4,11 @@
 $app->get('/book', 'Book::getAllData');
 $app->get('/book/add', 'Book::addBookView');
 $app->post('/book/add', 'Book::addBook');
-$app->get('/book/edit/{id}', 'Book::getEditbook');
+$app->get('/book/{id}/edit', 'Book::getEditbook')->assert('id', '\d+');
 $app->put('/book/edit', 'Book::updateEditbook');
 $app->get('/book/delete', 'Book::deleteBookView');
 $app->delete('/book/delete', 'Book::deleteBook');
-$app->get('/book/change/{id}', 'Book::changeHolderView');
+$app->get('/book/{id}/change', 'Book::changeHolderView')->assert('id', '\d+');
 $app->put('/book/change', 'Book::changeHolder');
 
 use Silex\Application;
@@ -30,9 +30,10 @@ class Book{
     
         // Добавить данные
         public static function addbook(Application $app, Request $request){
-            if (!isset($request)){
-                return $app['twig']->render('book_add.twig');            
-            } 
+            if (!isset($request)) {
+                    $error = "Error";
+                    return $app['twig']->render('error.twig', array('error' => $error));
+            }->assert('id', '\d+')
             elseif ($request->get('b_name') == '' || $request->get('b_author') == ''){
                 $error = "Not all the data entered";
                 return $app['twig']->render('error.twig', array('error' => $error));
@@ -43,24 +44,21 @@ class Book{
         }
     
         // Получить данные для обновления
-        public static function getEditBook(Application $app, $id){
-            
-                if (!isset($id)) {
-                    $app->abort(404, "book $id does not exist.");
-                }
-                $book = $app['db']->executeQuery('SELECT * FROM book WHERE b_id = ?', array($id));
-                if (count($book) == 0) {
-                    $app->abort(404, "book $id does not exist.");
+        public static function getEditBook(Application $app, $id){            
+                $book = $app['db']->fetchAssoc('SELECT * FROM book WHERE b_id = ?', array($id));
+                if (count($book['b_id']) == NULL) {
+                    $error = "Book ID:".$id." not found";
+                    return $app['twig']->render('error.twig', array('error' => $error));
                 }
                 return $app['twig']->render('book_edit.twig', array('book' => $book));
         }
      
         
         // Обновить данные
-        public static function updateEditBook(Application $app, Request $request){
-            
+        public static function updateEditBook(Application $app, Request $request){            
                 if (!isset($request)) {
-                    $app->abort(404, "Request $id does not exist.");
+                        $error = "Error";
+                        return $app['twig']->render('error.twig', array('error' => $error));
                 }
                 if($request->get('b_id') == '' ||  $request->get('b_name') == '' || $request->get('b_author') == ''){
                     $error = "Not all the data entered ";
@@ -95,16 +93,22 @@ class Book{
                 }
                 $app['db']->delete('book', array('b_id' => $request->get('b_id')));
                 return $app['twig']->render('ok.twig');
-        }        
+        }   
+        // Смена владельца вью
         public static function changeHolderView(Application $app, $id){
-            $book = $app['db']->fetchAll('SELECT * FROM book WHERE b_id = ?', array($id));
-            $people = $app['db']->fetchAll('SELECT * FROM people');
+            $book = $app['db']->fetchAssoc('SELECT * FROM book WHERE b_id = ?', array($id));
+            if (count($book['b_id']) == NULL) {
+                    $error = "Book ID:".$id." not found";
+                    return $app['twig']->render('error.twig', array('error' => $error));
+                }
+            $people = $app['db']->fetchAll('SELECT p_id, p_name, p_lastname FROM people');
             return $app['twig']->render('book_change_holder.twig', array('book' => $book, 'people' => $people));
         }
-        
+        // Сменить владельца
         public static function changeHolder(Application $app, Request $request){
             if (!isset($request)) {
-                    $app->abort(404, "Request $id does not exist.");
+                    $error = "Error";
+                    return $app['twig']->render('error.twig', array('error' => $error));
             }
             $app['db']->update('book', array('b_holder' => $request->get('p_id')), array('b_id' => $request->get('b_id')));        
             return $app['twig']->render('ok.twig');

@@ -4,7 +4,7 @@
 $app->get('/people', 'People::getAllData');
 $app->get('/people/add', 'People::addPeopleView');
 $app->post('/people/add', 'People::addPeople');
-$app->get('/people/edit/{id}', 'People::getEditPeople');
+$app->get('/people/{id}/edit', 'People::getEditPeople')->assert('id', '\d+');
 $app->put('/people/edit', 'People::updateEditPeople');
 $app->get('/people/delete', 'People::deletePeopleView');
 $app->delete('/people/delete', 'People::deletePeople');
@@ -28,9 +28,10 @@ class People{
     
         // Добавить данные
         public static function addPeople(Application $app, Request $request){
-            if (!isset($request)){
-                return $app['twig']->render('people_add.twig');            
-            } 
+            if (!isset($request)) {
+                    $error = "Error";
+                    return $app['twig']->render('error.twig', array('error' => $error));
+            }
             elseif ($request->get('p_name') == '' || $request->get('p_lastname') == '' || $request->get('p_post') == ''){
                 $error = "Not all the data entered";
                 return $app['twig']->render('error.twig', array('error' => $error));
@@ -41,14 +42,11 @@ class People{
         }
     
         // Получить данные для обновления
-        public static function getEditPeople(Application $app, $id){
-            
-                if (!isset($id)) {
-                    $app->abort(404, "People $id does not exist.");
-                }
-                $people = $app['db']->executeQuery('SELECT * FROM people WHERE p_id = ?', array($id));
-                if (count($people) == 0) {
-                    $app->abort(404, "People $id does not exist.");
+        public static function getEditPeople(Application $app, $id){    
+                $people = $app['db']->fetchAssoc('SELECT * FROM people WHERE p_id = ?', array($id));
+                if (count($people['p_id']) == NULL) {
+                    $error = "User ID:".$id." not found";
+                    return $app['twig']->render('error.twig', array('error' => $error));
                 }
                 return $app['twig']->render('people_edit.twig', array('people' => $people));
         }

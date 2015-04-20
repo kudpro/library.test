@@ -10,15 +10,14 @@
 </ul>
 <div class="row">
     <div id="result">
-        {% for book in book %}
-        <form class="form-horizontal" action="/book/edit/" method="POST">
+        <form class="form-horizontal" action="/book/edit" method="POST">
            <input type="hidden" id="_method" name="_method" value="PUT" />
             <fieldset>
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="textinput">Book name</label>  
               <div class="col-md-4">
-                 <input id="textinput" name="id" type="text"  hidden="hidden" value="{{ book.b_id}}">
+                 <input id="textinput" name="b_id" type="text"  hidden="hidden" value="{{ book.b_id}}">
                   <input id="textinput" name="b_name" type="text" placeholder="Book name" class="form-control input-md" value="{{ book.b_name }}">
               </div>
             </div>
@@ -42,7 +41,6 @@
 
             </fieldset>
         </form>
-        {% endfor %}
     </div>              
 </div>
 {% endblock %}

@@ -24,6 +24,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            <li><a href="/">Main page</a></li>
             <li><a href="/people">People</a></li>
             <li><a href="/book">Book</a></li>             
           </ul>
@@ -32,7 +33,9 @@
     </nav>
     <div class="container">
        <div class="row">
-           {% block content %}{% endblock %}
+          <div class="div col-lg-12 ol-md-12 ol-sm-12 ol-xs-12">
+               {% block content %}{% endblock %}
+           </div>
        </div>
     </div>
 </body>
