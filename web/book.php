@@ -33,7 +33,7 @@ class Book{
             if (!isset($request)) {
                     $error = "Error";
                     return $app['twig']->render('error.twig', array('error' => $error));
-            }->assert('id', '\d+')
+            }
             elseif ($request->get('b_name') == '' || $request->get('b_author') == ''){
                 $error = "Not all the data entered";
                 return $app['twig']->render('error.twig', array('error' => $error));
